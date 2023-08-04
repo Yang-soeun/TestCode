@@ -2,6 +2,9 @@ package testcode.cafekiosk.unit;
 
 import testcode.cafekiosk.unit.beverage.Americano;
 import testcode.cafekiosk.unit.beverage.Latte;
+import testcode.cafekiosk.unit.order.Order;
+
+import java.time.LocalDateTime;
 
 public class CafeKioskRunner {
     public static void main(String[] args) {
@@ -14,5 +17,7 @@ public class CafeKioskRunner {
 
         int totalPrice = cafeKiosk.calculateTotalPrice();
         System.out.println("총 주문 가격 : " + totalPrice);
+
+        Order order = cafeKiosk.createOrder(LocalDateTime.now());//실제로는 이렇게 사용하고 테스트에서는 직접 원하는 시간을 넣어서 테스트
     }
 }
