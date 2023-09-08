@@ -13,6 +13,11 @@ import static org.assertj.core.api.Assertions.tuple;
 import static testcode.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static testcode.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
+/**
+ * Persistence Layer 역할
+ * Data Access의 역할 -> 비지니스 로직 침투 x
+ * Data 대한 CRUD에만 집중한 Layer
+ */
 @ActiveProfiles("test")//test profile로 돌리기
 @SpringBootTest
 class ProductRepositoryTest {
@@ -58,6 +63,47 @@ class ProductRepositoryTest {
          * 1. size 체크
          * 2. 검증하고자 하는 필드만 추출하여 검증(extraction - contains~ 구조)
          */
+        assertThat(products).hasSize(2)
+                .extracting("productNum", "name", "sellingStatus")
+                .containsExactlyInAnyOrder(
+                        tuple("001", "아메리카노", SELLING),
+                        tuple("002", "카페라떼", HOLD)
+                );
+    }
+
+    @DisplayName("상품번호 리스트로 상품들을 조회한다.")
+    @Test
+    void findAllByProductNumIn(){
+        //given
+        Product product1 = Product.builder()
+                .productNum("001")
+                .type(HANDMADE)
+                .sellingStatus(SELLING)
+                .name("아메리카노")
+                .price(4000)
+                .build();
+
+        Product product2 = Product.builder()
+                .productNum("002")
+                .type(HANDMADE)
+                .sellingStatus(HOLD)
+                .name("카페라떼")
+                .price(4500)
+                .build();
+
+        Product product3 = Product.builder()
+                .productNum("003")
+                .type(HANDMADE)
+                .sellingStatus(STOP_SELLING)
+                .name("팥빙수")
+                .price(7000)
+                .build();
+
+        productRepository.saveAll(List.of(product1, product2, product3));
+
+        //when
+        List<Product> products = productRepository.findAllByProductNumIn(List.of("001", "002"));
+        //then
         assertThat(products).hasSize(2)
                 .extracting("productNum", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
