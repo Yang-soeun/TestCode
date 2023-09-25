@@ -25,6 +25,12 @@ import static org.assertj.core.api.Assertions.*;
 import static testcode.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static testcode.cafekiosk.spring.domain.product.ProductType.*;
 
+/**
+ * Business Layer 테스트
+ * 비즈니스 로직을 구현하는 역할
+ * Persistence Layer 와의 상호작용(Data 를 읽고 쓰는 행위)를 통해 비즈니스 로직을 전개
+ * 트랜잭션을 보장해야 한다
+ */
 @ActiveProfiles("test")
 //@Transactional
 @SpringBootTest//통합테스트
@@ -227,10 +233,10 @@ class OrderServiceTest {
 
 
     //필요한것만 입력받고 나머지는 그냥 기본값 쓰도록 만들어서 사용하기
-    private Product createProduct(ProductType type, String productNum, int price){
+    private Product createProduct(ProductType type, String productNumber, int price){
         return Product.builder()
                 .type(type)
-                .productNum(productNum)
+                .productNumber(productNumber)
                 .price(price)
                 .sellingStatus(SELLING)
                 .name("메뉴 이름")

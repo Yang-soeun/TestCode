@@ -3,9 +3,9 @@ package testcode.cafekiosk.spring.domain.product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ import static testcode.cafekiosk.spring.domain.product.ProductType.HANDMADE;
  */
 @ActiveProfiles("test")//test profile로 돌리기
 @SpringBootTest
+@Transactional
 class ProductRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
@@ -29,29 +30,11 @@ class ProductRepositoryTest {
     @Test
     void findAllBySellingStatusIn(){
         //given
-        Product product1 = Product.builder()
-                .productNum("001")
-                .type(HANDMADE)
-                .sellingStatus(SELLING)
-                .name("아메리카노")
-                .price(4000)
-                .build();
+        Product product1 = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
 
-        Product product2 = Product.builder()
-                .productNum("002")
-                .type(HANDMADE)
-                .sellingStatus(HOLD)
-                .name("카페라떼")
-                .price(4500)
-                .build();
+        Product product2 = createProduct("002", HANDMADE, HOLD, "카페라떼", 4500);
 
-        Product product3 = Product.builder()
-                .productNum("003")
-                .type(HANDMADE)
-                .sellingStatus(STOP_SELLING)
-                .name("팥빙수")
-                .price(7000)
-                .build();
+        Product product3 = createProduct("003", HANDMADE, STOP_SELLING, "팥빙수", 7000);
 
         productRepository.saveAll(List.of(product1, product2, product3));
         //when
@@ -65,7 +48,7 @@ class ProductRepositoryTest {
          * 2. 검증하고자 하는 필드만 추출하여 검증(extraction - contains~ 구조)
          */
         assertThat(products).hasSize(2)
-                .extracting("productNum", "name", "sellingStatus")
+                .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
                         tuple("001", "아메리카노", SELLING),
                         tuple("002", "카페라떼", HOLD)
@@ -76,40 +59,61 @@ class ProductRepositoryTest {
     @Test
     void findAllByProductNumIn(){
         //given
-        Product product1 = Product.builder()
-                .productNum("001")
-                .type(HANDMADE)
-                .sellingStatus(SELLING)
-                .name("아메리카노")
-                .price(4000)
-                .build();
+        Product product1 = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
 
-        Product product2 = Product.builder()
-                .productNum("002")
-                .type(HANDMADE)
-                .sellingStatus(HOLD)
-                .name("카페라떼")
-                .price(4500)
-                .build();
+        Product product2 = createProduct("002", HANDMADE, HOLD, "카페라떼", 4500);
 
-        Product product3 = Product.builder()
-                .productNum("003")
-                .type(HANDMADE)
-                .sellingStatus(STOP_SELLING)
-                .name("팥빙수")
-                .price(7000)
-                .build();
+        Product product3 = createProduct("003", HANDMADE, STOP_SELLING, "팥빙수", 7000);
 
         productRepository.saveAll(List.of(product1, product2, product3));
 
         //when
-        List<Product> products = productRepository.findAllByProductNumIn(List.of("001", "002"));
+        List<Product> products = productRepository.findAllByProductNumberIn(List.of("001", "002"));
         //then
         assertThat(products).hasSize(2)
-                .extracting("productNum", "name", "sellingStatus")
+                .extracting("productNumber", "name", "sellingStatus")
                 .containsExactlyInAnyOrder(
                         tuple("001", "아메리카노", SELLING),
                         tuple("002", "카페라떼", HOLD)
                 );
+    }
+
+    @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어온다.")
+    @Test
+    void findLatestProductNumber(){
+        //given
+        String targetProductNumber  = "003";
+        Product product1 = createProduct("001", HANDMADE, SELLING, "아메리카노", 4000);
+
+        Product product2 = createProduct("002", HANDMADE, HOLD, "카페라떼", 4500);
+
+        Product product3 = createProduct("003", HANDMADE, STOP_SELLING, "팥빙수", 7000);
+
+        productRepository.saveAll(List.of(product1, product2, product3));
+
+        //when
+        String latestProductNumber = productRepository.findLatestProductNumber();
+        //then
+        assertThat(latestProductNumber).isEqualTo(targetProductNumber);
+    }
+
+    @DisplayName("가장 마지막으로 저장한 상품의 상품번호를 읽어올 때, 상품이 하나도 없는 경우에는 null을 반환한다")
+    @Test
+    void findLatestProductNumberWhenProductIsEmpty(){
+        //when
+        String latestProductNumber = productRepository.findLatestProductNumber();
+        //then
+        assertThat(latestProductNumber).isNull();
+    }
+
+    private Product createProduct(String productNumber, ProductType type, ProductSellingStatus sellingStatus, String name, int price) {
+        Product product1 = Product.builder()
+                .productNumber(productNumber)
+                .type(type)
+                .sellingStatus(sellingStatus)
+                .name(name)
+                .price(price)
+                .build();
+        return product1;
     }
 }
