@@ -82,16 +82,16 @@ public class OrderService {
     private static List<String> extractStockProductNumbers(List<Product> products) {
         List<String> stockProductNumbers = products.stream()
                 .filter(product -> ProductType.containsStockType(product.getType()))
-                .map(Product::getProductNum)
+                .map(Product::getProductNumber)
                 .collect(Collectors.toList());
         return stockProductNumbers;
     }
 
     private List<Product> findProductsBy(List<String> productNumbers) {
-        List<Product> products = productRepository.findAllByProductNumIn(productNumbers);//IN 절로 하면 001, 001등 중복되는 상품을 넣은 경우 중복이 제거된다
+        List<Product> products = productRepository.findAllByProductNumberIn(productNumbers);//IN 절로 하면 001, 001등 중복되는 상품을 넣은 경우 중복이 제거된다
 
         Map<String, Product> productMap = products.stream()
-                .collect(Collectors.toMap(Product::getProductNum, p -> p));
+                .collect(Collectors.toMap(Product::getProductNumber, p -> p));
 
         List<Product> duplicateProducts = productNumbers.stream()
                 .map(productMap::get)

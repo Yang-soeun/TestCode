@@ -30,10 +30,10 @@ class OrderTest {
         assertThat(order.getTotalPrice()).isEqualTo(3000);
 
     }
-    private Product createProduct(String productNum, int price){
+    private Product createProduct(String productNumber, int price){
         return Product.builder()
                 .type(HANDMADE)
-                .productNum(productNum)
+                .productNumber(productNumber)
                 .price(price)
                 .sellingStatus(SELLING)
                 .name("메뉴 이름")
