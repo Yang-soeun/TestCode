@@ -1,4 +1,4 @@
-#?? ??
+#profile이 설정되지 않은 맨 위에 부분은 모든 profile에 공통 설정 부분
 spring:
   profiles:
     default: local
