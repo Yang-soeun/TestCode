@@ -31,6 +31,7 @@
 
 ### Chapter4 Spring & JPA 기반 테스트
 ✏ 키워드: Layered Architecture, 단위 테스트 vs 통합테스트, IoC, DI, AOP, ORM, 패러다임의 불일치, Hibernate, Spring Data JPA
+           @RestControllerAdvice, @ExceptionHandler, Spring bean validation, @WebMvcTest, ObjectMapper, Mock, Mockito, @MockBean
 📕 추가학습: Hexagonal Architecture
 
 💡 요구사항 추가
