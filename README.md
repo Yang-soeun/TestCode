@@ -30,8 +30,8 @@
 - 주문의 총 금액을 계산할 수 있어야 한다
 
 ### Chapter4 Spring & JPA 기반 테스트
-✏ 키워드: 
-📕 추가학습:
+✏ 키워드: Layered Architecture, 단위 테스트 vs 통합테스트, IoC, DI, AOP, ORM, 패러다임의 불일치, Hibernate, Spring Data JPA
+📕 추가학습: Hexagonal Architecture
 
 💡 요구사항 추가
 - 주문 생성 시 재고 확인 및 개수 차감 후 생성하기
