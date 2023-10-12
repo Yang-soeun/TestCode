@@ -47,7 +47,7 @@ class ProductServiceTest {
                 .build();
 
         //when-> 대부분 한줄(테스트 하고자 하는 특정 행위)
-        ProductResponse productResponse = productService.createProduct(request);
+        ProductResponse productResponse = productService.createProduct(request.toServiceRequest());
 
         //then
         assertThat(productResponse)
@@ -76,7 +76,7 @@ class ProductServiceTest {
                 .build();
 
         //when-> 대부분 한줄(테스트 하고자 하는 특정 행위)
-        ProductResponse productResponse = productService.createProduct(request);
+        ProductResponse productResponse = productService.createProduct(request.toServiceRequest());
 
         //then
         assertThat(productResponse)

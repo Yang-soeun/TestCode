@@ -21,7 +21,7 @@ public class ProductController {
 
     @PostMapping("/api/v1/products/new")
     public ApiResponse<ProductResponse> crateProduct(@RequestBody @Valid ProductCreateRequest request){
-        return ApiResponse.ok(productService.createProduct(request));
+        return ApiResponse.ok(productService.createProduct(request.toServiceRequest()));
     }
     @GetMapping("/api/v1/products/selling")
     public ApiResponse<List<ProductResponse>> getSellingProducts(){
