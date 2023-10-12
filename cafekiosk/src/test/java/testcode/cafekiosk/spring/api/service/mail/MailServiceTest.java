@@ -1,9 +1,9 @@
 package testcode.cafekiosk.spring.api.service.mail;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -39,14 +39,21 @@ class MailServiceTest {
         //annotaion으로 만들 수 있음
 //        MailSendClient mailSendClient = Mockito.mock(MailSendClient.class);
 //        MailSendHistoryRepository mailSendHistoryRepository = Mockito.mock(MailSendHistoryRepository.class);
-
         /**
          * 얘도 어노테이션으로 만들 수 있음
          */
 //        MailService mailService = new MailService(mailSendClient, mailSendHistoryRepository);//2개의 Mock 객체를 가지고 있는 메일 서비스 생성
 
-        Mockito.when(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
-                .thenReturn(true);
+        /**
+         * given 위치인데 when이라는 문법을 사용하게 돼서
+         * BDDMockito 가 생김
+         */
+//        Mockito.when(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
+//                .thenReturn(true);
+
+        BDDMockito.given(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))
+                        .willReturn(true);
+
 
         //when
         boolean result = mailService.sendMail("", "", "", "");
