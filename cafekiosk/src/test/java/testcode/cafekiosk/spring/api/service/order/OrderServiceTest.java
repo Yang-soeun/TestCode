@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import testcode.cafekiosk.spring.IntegrationTestSupport;
 import testcode.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import testcode.cafekiosk.spring.api.service.order.response.OrderResponse;
 import testcode.cafekiosk.spring.domain.order.OrderRepository;
@@ -29,11 +28,7 @@ import static testcode.cafekiosk.spring.domain.product.ProductType.*;
  * Persistence Layer 와의 상호작용(Data 를 읽고 쓰는 행위)를 통해 비즈니스 로직을 전개
  * 트랜잭션을 보장해야 한다
  */
-@ActiveProfiles("test")
-//@Transactional
-@SpringBootTest//통합테스트
-//@DataJpaTest//이게 스프링부트테스트 보다 가벼움 근데 스프링부트 테스트를 권장함
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
     @Autowired private OrderService orderService;
     @Autowired private ProductRepository productRepository;
     @Autowired private OrderRepository orderRepository;
