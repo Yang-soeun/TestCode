@@ -52,6 +52,9 @@ class ProductTypeTest {
         assertThat(result).isEqualTo(expected);
     }
 
+    /**
+     * private은 아래에 쓰는 경우가 많지만 given절에 해당하기 떄문에 위에 작성
+     */
     private static Stream<Arguments> provideProductTypesForCheckingStockType(){
         return Stream.of(
                 Arguments.of(ProductType.HANDMADE, false),
@@ -64,7 +67,7 @@ class ProductTypeTest {
      * MethodSource 방식
      */
     @DisplayName("상품 타입이 재고 관련 타입인지를 체크한다.")
-    @MethodSource("provideProductTypesForCheckingStockType")
+    @MethodSource("provideProductTypesForCheckingStockType") //메서드 이름
     @ParameterizedTest
     void containsStockType4(ProductType productType, boolean expected){
         //when
