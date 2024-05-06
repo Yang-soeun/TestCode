@@ -1,4 +1,5 @@
 package testcode.cafekiosk.spring.api.service.product;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,6 @@ import testcode.cafekiosk.spring.domain.product.Product;
 import testcode.cafekiosk.spring.domain.product.ProductRepository;
 import testcode.cafekiosk.spring.domain.product.ProductSellingStatus;
 import testcode.cafekiosk.spring.domain.product.ProductType;
-
 
 import java.util.List;
 

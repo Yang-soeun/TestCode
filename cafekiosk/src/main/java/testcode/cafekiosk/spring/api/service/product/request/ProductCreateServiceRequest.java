@@ -8,9 +8,6 @@ import testcode.cafekiosk.spring.domain.product.Product;
 import testcode.cafekiosk.spring.domain.product.ProductSellingStatus;
 import testcode.cafekiosk.spring.domain.product.ProductType;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
-
 @Getter
 @NoArgsConstructor
 public class ProductCreateServiceRequest {
