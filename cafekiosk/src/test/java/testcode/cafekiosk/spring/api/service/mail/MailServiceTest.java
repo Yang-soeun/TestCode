@@ -65,6 +65,7 @@ class MailServiceTest {
     }
 
     /**
+     * Spy: 한 객체에서 일부만 stubbing 하고 싶을 때 사용
      * Spy는 실제 객체를 기반으로 만들어지기 때문에 when사용불가(stubbing)
      * do를 사용해서 해야함
      * Mockito.when(mailSendClient.sendEmail(anyString(), anyString(), anyString(), anyString()))

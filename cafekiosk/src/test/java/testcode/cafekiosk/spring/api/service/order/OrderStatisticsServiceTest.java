@@ -3,7 +3,6 @@ package testcode.cafekiosk.spring.api.service.order;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -25,6 +24,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static testcode.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static testcode.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
@@ -70,7 +70,7 @@ class OrderStatisticsServiceTest {
         Order order4 = createPaymentCompletedOrder(LocalDateTime.of(2023, 3, 6, 0, 0, 0), products);
 
         //stubbing: Mock 객체에 원하는 행위를 정의하는것
-        Mockito.when(mailSendClient.sendEmail(any(String.class),any(String.class), any(String.class), any(String.class)))//결과가 String 값의 어떤것이든 좋다.
+        when(mailSendClient.sendEmail(any(String.class),any(String.class), any(String.class), any(String.class)))//결과가 String 값의 어떤것이든 좋다.
                 .thenReturn(true);//Mock 객체의 행위를 지정
         //when
         //3월 5일 주문 가져오기

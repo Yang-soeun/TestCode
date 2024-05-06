@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import testcode.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
-import testcode.cafekiosk.spring.domain.product.Product;
 import testcode.cafekiosk.spring.domain.product.ProductSellingStatus;
 import testcode.cafekiosk.spring.domain.product.ProductType;
 
