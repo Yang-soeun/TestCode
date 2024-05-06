@@ -3,11 +3,10 @@ package testcode.cafekiosk.spring.domain.product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+import testcode.cafekiosk.spring.IntegrationTestSupport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -19,10 +18,9 @@ import static testcode.cafekiosk.spring.domain.product.ProductType.HANDMADE;
  * Data Access의 역할 -> 비지니스 로직 침투 x
  * Data 대한 CRUD에만 집중한 Layer
  */
-@ActiveProfiles("test")//test profile로 돌리기
-@SpringBootTest
-@Transactional
-class ProductRepositoryTest {
+
+@Transactional //롤백 수행
+class ProductRepositoryTest extends IntegrationTestSupport {
     @Autowired
     private ProductRepository productRepository;
 

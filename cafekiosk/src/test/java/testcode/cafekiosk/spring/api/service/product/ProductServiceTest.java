@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
+import testcode.cafekiosk.spring.IntegrationTestSupport;
 import testcode.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import testcode.cafekiosk.spring.api.service.product.response.ProductResponse;
 import testcode.cafekiosk.spring.domain.product.Product;
@@ -20,9 +19,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static testcode.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static testcode.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+class ProductServiceTest extends IntegrationTestSupport {
     @Autowired private ProductService productService;
     @Autowired private ProductRepository productRepository;
 
