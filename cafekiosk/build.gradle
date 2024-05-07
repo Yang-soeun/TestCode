@@ -37,6 +37,9 @@ dependencies {
     //mysql
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    //Guava
+    implementation("com.google.guava:guava:31.1-jre")
+
 }
 
 tasks.named('test') {
