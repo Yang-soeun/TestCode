@@ -2,7 +2,6 @@ package testcode.cafekiosk.spring.domain.order;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import testcode.cafekiosk.spring.domain.product.Product;
 
 import java.time.LocalDateTime;
@@ -12,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static testcode.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static testcode.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@SpringBootTest
 class OrderTest {
     @DisplayName("주문 생성 시상품 리스트에서 주문의 총 금액을 계산한다.")
     @Test
